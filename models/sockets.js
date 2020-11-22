@@ -13,9 +13,15 @@ class Sockets {
     this.io.on("connection", (socket) => {
       // Escuchar evento: mensaje-to-server
       console.log("Cliente conectado");
-        
+
       // Emit all the current bands to the connected cliente
-      socket.emit('current-band', this.bandList.getBands())
+      socket.emit("current-bands", this.bandList.getBands());
+
+      // Vote for the band
+      socket.on("vote-band", (id) => {
+        this.bandList.increaseVotes(id);
+        this.io.emit("current-bands", this.bandList.getBands());
+      });
     });
   }
 }
