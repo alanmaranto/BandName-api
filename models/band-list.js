@@ -36,6 +36,7 @@ class BandList {
   changeName(id, newName) {
     this.bands = this.bands.map((band, index) => {
       if (band.id === id) {
+        console.log('here')
         band.name = newName;
       }
       return band;
